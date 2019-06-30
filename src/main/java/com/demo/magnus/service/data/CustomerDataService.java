@@ -60,4 +60,18 @@ public class CustomerDataService {
     }
 
 
+    public Customer create(Customer customer) {
+        return customerRepository.save(customer);
+    }
+
+    public Customer update(String uuid, Customer updatedCustomer) {
+        Customer customerOld = customerRepository.findByUuid(uuid);
+        updatedCustomer.setId(customerOld.getId());
+        return customerRepository.save(updatedCustomer);
+    }
+
+    public void delete(String uuid) {
+        Customer toDeleteCustomer = customerRepository.findByUuid(uuid);
+        customerRepository.delete(toDeleteCustomer);
+    }
 }
